@@ -69,3 +69,40 @@ Basic App with MongoDB &amp; Express JS
 * Create **DELETE** route to find & remove a document
 * Create **POST** route to update a document.
 * Use **mongoose** library to interact with MongoDB
+
+## Mongoose Schema vs. Model
+A Mongoose model is a wrapper on the Mongoose schema. 
+A Mongoose schema defines the structure of the document, default values, validators, etc., whereas a Mongoose model provides an interface to the database for creating, querying, updating, deleting records, etc.
+
+Creating a Mongoose model comprises primarily of three parts:
+
+### 1. Referencing Mongoose
+`let mongoose = require('mongoose')` or `import mongoose from mongoose`
+<br/>
+This reference will be the same as the one that was returned when we connected to the database, which means the schema and model definitions will not need to explicitly connect to the database.
+
+### 2. Defining the Schema
+A schema defines document properties through an object where the key name corresponds to the property name in the collection.
+<br/>
+`let characterSchema = new mongoose.Schema({
+id: { type: Number, required: true},
+name: String
+})`
+<br/>
+Here we define a property called email with a schema type String which maps to an internal validator that will be triggered when the model is saved to the database. It will fail if the data type of the value is not a string type.
+
+### 3. Exporting a Model
+We need to call the model constructor on the Mongoose instance and pass it the name of the collection and a reference to the schema definition.
+<br/>
+`module.exports = mongoose.model('Character', characterSchema)`
+<br/>
+Let’s combine the above code into `./models/characters.js` to define the contents of a basic character model:
+<br/>
+```
+import mongoose from mongoose 
+let characterSchema = new mongoose.Schema({ 
+id: { type: Number, required: true},
+name: String 
+})
+module.exports = mongoose.model('Character', characterSchema)
+```
