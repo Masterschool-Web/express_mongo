@@ -1,9 +1,8 @@
 import express from "express";
+import config from "configs/config"
 
 const app = express();
 
-const PORT = 3000;
-
-app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
+app.listen(config.app.port, () => {
+  console.log(`${config.app.name} is running on port ${config.app.port}`);
 });
