@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 dotenv.config()
+
 const config = {
     app: {
         port: 3000,
@@ -11,5 +12,4 @@ const config = {
         password:process.env.DB_PASSWORD
     }
 };
-
 export default config

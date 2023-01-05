@@ -1,10 +1,22 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema;
+import config from "../configs/config.js";
+const { db: { host, name, password } } = config;
+const connectionString = `mongodb+srv://${name}:${password}@${host}`;
+await mongoose.connect(connectionString);
+mongoose.connection.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+const Schema = mongoose.Schema;
 // create schema
 const CharacterSchema = new Schema({
-   // populate properties
+    id: {type: Number, required: true},
+    name: {type: String, required: true},
+    blood: String,
+    species: String,
+    patronus: String,
+    born: String,
+    quote: String,
+    imgUrl: String
 });
 
 // Export model
-module.exports = mongoose.model("Character", CharacterSchema);
+export const CharacterModel = mongoose.model('Character', CharacterSchema);
