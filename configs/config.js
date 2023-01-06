@@ -7,8 +7,8 @@ const config = {
         name: 'express_mongo'
     },
     db: {
-        host: 'cluster0.jw5th44.mongodb.net/?retryWrites=true&w=majority',
-        name: 'express-mongo',
+        host:process.env.DB_HOST,
+        name:process.env.DB_USERNAME,
         password:process.env.DB_PASSWORD
     }
 };

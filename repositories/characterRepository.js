@@ -30,11 +30,22 @@ export async function findAll() {
     }
 }
 
-export async function findOne(key, value) {
+export async function find(key, value) {
     try {
-        return await CharacterModel.find({
-            key: value
-        })
+        if (key === 'id') {
+            return await CharacterModel.find({id: value})
+        } else {
+            const query =  { [`${key}`]: { $regex: value, $options:'i'} };
+            return await CharacterModel.find(query)
+        }
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export async function deleteById(id) {
+    try {
+        return await CharacterModel.findOneAndDelete({id: id})
     } catch (e) {
         console.log(e)
     }

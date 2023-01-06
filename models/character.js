@@ -1,10 +1,7 @@
-import mongoose from "mongoose";
-import config from "../configs/config.js";
-const { db: { host, name, password } } = config;
-const connectionString = `mongodb+srv://${name}:${password}@${host}`;
-await mongoose.connect(connectionString);
-mongoose.connection.on("error", console.error.bind(console, "MongoDB connection error:"));
+import * as mongoose from "mongoose";
+import {connect} from "../configs/db.js";
 
+connect()
 const Schema = mongoose.Schema;
 // create schema
 const CharacterSchema = new Schema({
