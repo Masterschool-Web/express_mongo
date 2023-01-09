@@ -1,4 +1,5 @@
 import express from "express";
+import {basicAuth} from "../helpers/basicAuth.js";
 import {
     loadData,
     getAll,
@@ -8,9 +9,10 @@ import {
     getByBloodType,
     removeById
 } from "../service/characterService.js";
+
 const router = express.Router();
 
-router.put('/load', async (req, res) => {
+router.put('/load', basicAuth, async (req, res) => {
     const result = await loadData()
     if (!result){
         return res.status(400).send("Shit... this did not go well at all");
@@ -69,7 +71,7 @@ router.get("/blood/:type", async (req, res) => {
     res.send(result);
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id",  basicAuth, async (req, res) => {
     const { id } = req.params;
     const result = await removeById(id)
     if (!result){
