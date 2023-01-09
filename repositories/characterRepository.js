@@ -35,8 +35,7 @@ export async function find(key, value) {
         if (key === 'id') {
             return await CharacterModel.find({id: value})
         } else {
-            const query =  { [`${key}`]: { $regex: value, $options:'i'} };
-            return await CharacterModel.find(query)
+            return await CharacterModel.find({ [`${key}`]: { $regex: value, $options:'i'} })
         }
     } catch (e) {
         console.log(e)
