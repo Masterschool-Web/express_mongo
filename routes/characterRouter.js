@@ -31,7 +31,7 @@ router.get('/load', async (req, res) => {
     return res.status(401).send("Method not allowed");
 });
 
-router.get("/", async (req, res) => {
+router.get("/", basicAuth, async (req, res) => {
     res.send(await getAll());
 });
 
